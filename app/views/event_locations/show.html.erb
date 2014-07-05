@@ -1,0 +1,12 @@
+<h1><%= @event.name %></h1>
+
+<% if @event.location %>
+   <p><%= @event.location.name %></p>
+   <p><%= link_to "Edit Location" , edit_event_location_path(@event) %></p>
+   <p><%= link_to "Delete Location" , event_location_path(@event) , :method => :delete %></p>
+<% else %>
+   <p>Location NOT SET</p>
+   <p><%= link_to "New Location" , new_event_location_path(@event) %></p>
+<% end %>
+
+

@@ -1,0 +1,26 @@
+<%= @event.name %>
+<p>狀態： <%= @event.status %></p>
+<p>
+<% if @event.closed? %>
+   <%= link_to '[Open]' , event_state_path(@event) , :method => :post %>
+<% else %>
+   <%= link_to '[Close]' , event_state_path(@event) , :method => :delete %>
+<% end %>
+</p>
+
+
+<%= simple_format(@event.description) %>
+<p>Category:<%= @event.category_name %></p>
+<% @event.questions.each_with_index do |q,index| %>
+   <%= simple_format("Question #{index+1}：" + q.content) %>
+   <ul>
+      <% q.answers.each do |ans| %>
+         <li>
+            <%=  ans.content %>
+         </li>
+      <% end %>
+   </ul>
+<% end %>
+<%= debug(@event) %>
+<% Rails.logger.debug("DEBUG:event: #{@event.inspect}") %>
+<p><%= link_to 'Back to index', events_path %>

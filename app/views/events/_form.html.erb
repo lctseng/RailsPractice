@@ -1,0 +1,41 @@
+<%= f.label :name, "Name" %>
+<%= f.text_field :name %>
+<%= f.label :description, "Description" %>
+<%= f.text_area :description %>
+<%= f.select :category_id , category_options %><br />
+
+<%- "這裡是處理location" %>
+<%= f.fields_for :location do |location_form| %>
+   <p>
+   <%= location_form.label :name , "地點名稱" %>
+   <%= location_form.text_field :name %>
+   
+   <% unless location_form.object.new_record? %>
+      <%= location_form.label :_destroy , "移除地點" %>
+      <%= location_form.check_box :_destroy %>
+   <% end %>
+   </p>
+<% end %>
+
+<%- "處理群組" %>
+<% @groups.each do |g| %>
+   <%= check_box_tag("event[group_ids][]",g.id,@event.groups.map(&:id).include?(g.id)) %><%= g.name %><br />
+<% end %>
+
+<%= hidden_field_tag 'event[group_ids][]','' %>
+
+
+
+<%= f.fields_for :questions do |builder| %>
+   <%= render  'question_fields' ,  :f => builder  %> 
+<% end %>
+<p><%= link_to_add_fields("新增問題",f,:questions) %></p>
+
+<% if @event.errors.any? %>
+   <ul>
+   <% @event.errors.full_messages.each do |msg| %>
+         <li> <%= msg %></li>
+   <% end %>
+   </ul>
+<% end %>
+

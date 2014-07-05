@@ -1,0 +1,12 @@
+<ul>
+   <% @attendees.each do |attendee| %>
+      <li>
+      <%= "attendee:#{attendee.name}" %>
+      <%= link_to "view" , event_attendee_path(@event,attendee) %>
+      <%= link_to "edit" , edit_event_attendee_path(@event,attendee) %>
+      <%= link_to "delete" , event_attendee_path(@event,attendee) , :method => :delete %>
+      </li>
+   <% end %>
+</ul>
+<%= button_to "New attendee",new_event_attendee_path(@event) , :method => "get" , :class => "btn btn-primary" %> 
+

@@ -1,0 +1,10 @@
+<p><%= "Current Time:#{Time.now}" %></p>
+<h1>Welcome to adminastration mode!</h1>
+<p><%= t(:hello , :name => @user_name , :scope => :admin)  %>
+<p>
+<%= link_to "中文版" , :controller => controller.controller_name , :action => controller.action_name , :locale => "zh-TW" %>
+<%= link_to "English" , :controller => controller.controller_name , :action => controller.action_name , :locale => "en" %>
+
+
+
+</p>

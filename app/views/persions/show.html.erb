@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @persion.name %>
+</p>
+
+<p>
+  <strong>Bio:</strong>
+  <%= @persion.bio %>
+</p>
+
+<p>
+  <strong>Birthday:</strong>
+  <%= @persion.birthday %>
+</p>
+
+<%= link_to 'Edit', edit_persion_path(@persion) %> |
+<%= link_to 'Back', persions_path %>

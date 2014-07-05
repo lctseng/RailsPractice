@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>Forum</title>
+  <%= stylesheet_link_tag "base", "style" %>
+  <%- #javascript_include_tag :defaults %>
+  <%= csrf_meta_tag %>
+</head>
+<body>
+  <div id="container">
+    <div id="header">
+      <h1><a href="/">Forum</a></h1>
+      <div id="user-navigation">
+        <ul class="wat-cf">
+					<% if true %>
+						<li><%= link_to('登出', "/") %></li>
+						<li><%= link_to('修改密碼', "/") %></li>
+					<% else %>
+						<li><%= link_to('註冊', "/" ) %></li>
+				                <li><%= link_to('登入', "/" ) %></li>
+					<% end %>
+        </ul>
+      </div>      
+      <div id="main-navigation">
+        <ul class="wat-cf">
+        	<li><%= link_to "Events", events_path %></li>
+                <li><%= link_to "People", "/" %></li>
+        </ul>
+      </div>
+    </div>    
+    <div id="wrapper" class="wat-cf">
+      <div class="flash">
+        <% flash.each do |type, message| -%>
+          <div class="message <%= type %>">
+            <p><%= message %></p>
+          </div>
+        <% end -%>
+      </div>
+      <div id="main">
+        <%= yield %>
+        <div id="footer">
+          <div class="block">
+            <p>Copyright &copy; <%= Time.now.year %> Forum.</p>
+          </div>      
+        </div>
+      </div>
+      <div id="sidebar">
+        <%= yield :sidebar %>
+      </div>
+    </div>    
+  </div>
+</body>
+</html>

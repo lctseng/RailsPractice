@@ -1,0 +1,23 @@
+development:
+   adapter: mysql2
+   encoding: utf8
+   database: rails_demo_development
+   host: localhost
+   username: rails
+   password: h810270
+
+test:
+   adapter: mysql2
+   encoding: utf8
+   database: rails_demo_test
+   host: localhost
+   username: rails
+   password: h810270
+
+production:
+   adapter: mysql2
+   encoding: utf8
+   database: rails_demo_production
+   host: localhost
+   username: rails
+   password: h810270

@@ -1,0 +1,32 @@
+<%= form_tag search_events_path, :method => :get do %>
+   關鍵字：<%= text_field_tag "keyword" , nil ,:placeholder => "Search Event name..."  %>
+   <%= submit_tag "Search" %>
+<% end %>
+<%= link_to 'Sort by name' , events_path(:order =>'name') %>
+<%= link_to 'Sort by default' , events_path %>
+
+<%- # 時間統計 %>
+<% benchmark("Rendering Page Event") do %>
+
+<ul>
+<% @events.each do |event| %>
+   <li>
+   <%= "Event name:" %>
+   <%= link_to event.name, event_path(event) %><br />
+   <%= link_to 'View Dashboard' , dashboard_event_path(event) %><br />
+   <%= link_to 'View XML', event_path(event  , :format => :xml ) %><br />
+   <%= link_to 'View JSON', event_path(event  ,:format => :json) %><br />
+   <%= link_to 'View attendee', event_attendees_path(event) %><br />
+   <%= link_to 'View location' , event_location_path(event) %><br />
+   <div style="float:left;width:50px;">
+   <%= button_to 'Edit',edit_event_path(event), :method => :get , :class => "btn btn-primary btn-sm" , :form => {:style => "display:inline;margin:0;padding:0;"}  %>
+</div> 
+   <%= button_to 'Delete',event_path(event) , :method => :delete  , :class => "btn btn-primary btn-sm" , :form => {:style=>"display:inline;"}  %>
+</div>
+   </li>
+<% end %>
+</ul>
+<%= button_to 'New event', new_event_path , :method => :get  %>
+<%= paginate @events %>
+
+<%  end #結束時間統計 %>
