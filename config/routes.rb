@@ -1,6 +1,9 @@
 #encoding:utf-8
 Rails.application.routes.draw do
 
+  # 連結到社團群組網頁
+  resources :club_groups
+
   #resources :persions
 
   namespace :admin do 

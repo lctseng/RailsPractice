@@ -1,0 +1,9 @@
+<%= f.label :title , "Title" %><br />
+<%= f.text_field :title , :class => "input-xxlarge" %><br />
+<%= f.label :description , "Description" %><br />
+<%= f.text_area :description ,:class => "input-xxlarge"  %>
+
+<div class="form-actions">
+   <%= f.submit "Submit" ,:disable_with => "Submiting..." , :class => "btn btn-primary"  %>
+</div>
+
