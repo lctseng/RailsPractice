@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140707151144) do
+ActiveRecord::Schema.define(version: 20140708083102) do
 
   create_table "answers", force: true do |t|
     t.integer  "question_id"
@@ -78,6 +78,13 @@ ActiveRecord::Schema.define(version: 20140707151144) do
     t.string   "name"
     t.text     "bio"
     t.date     "birthday"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "posts", force: true do |t|
+    t.text     "content"
+    t.integer  "group_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

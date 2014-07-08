@@ -8,6 +8,7 @@ class ClubGroupsController < ApplicationController
 
    # Show
    def show
+      @posts = @group.posts
    end
 
    # New

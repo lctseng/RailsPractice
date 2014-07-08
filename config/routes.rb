@@ -2,7 +2,9 @@
 Rails.application.routes.draw do
 
   # 連結到社團群組網頁
-  resources :club_groups
+  resources :club_groups do
+     resources :posts
+  end
 
   #resources :persions
 

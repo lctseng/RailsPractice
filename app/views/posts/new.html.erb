@@ -1,0 +1,6 @@
+<p<%= "New Post for #{@group.title}" %></p>
+<div class="span12">
+<%= form_for @post ,:url => club_group_posts_path(@group) do |f| %>
+   <%= render "post_form" , :f => f %>
+<% end %>
+</div>
