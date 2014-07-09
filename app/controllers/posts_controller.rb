@@ -2,6 +2,7 @@ class PostsController < ApplicationController
    before_filter :find_group 
    before_filter :find_post , :only => [:edit,:update,:destroy]
    before_action :login_required , :only => [:new , :create , :edit , :update , :destroy]
+   before_action :member_required , :only => [:new , :create]
 
    def edit
       @page_title = "Edit Post"
@@ -47,6 +48,13 @@ class PostsController < ApplicationController
 
    def post_params(extra_allow=[])
       params.require(:post).permit([:content,:club_group_id] + extra_allow)
+   end
+
+   def member_required
+      if !current_user.is_member_of?(@group)
+         flash[:alert] = "You are not member of this group!"
+         redirect_to club_group_path(@group)
+      end
    end
 
 end

@@ -1,7 +1,21 @@
 <div class="span12">
    <div class="group">
-      <%= link_to "New Post",new_club_group_post_path(@group) , :class => "btn btn-mini btn-danger"  %>
+      <%- # 群組控制  %>
       <% if current_user %>
+         <div class="group">
+         <% if current_user.is_member_of?(@group) %>
+            <%= link_to "Quit Group" , quit_club_group_path(@group),:method => :post , :class => "btn btn-mini btn-warning" %>
+         <% else %>
+            <%= link_to "Join Group" , join_club_group_path(@group) , :method => :post , :class => "btn -btn-mini btn-primary" %>
+         <% end %>
+         </div>
+      <br />
+      <% end %>
+      <%- # 文章控制 %>
+      <% if current_user %>
+         <% if current_user.is_member_of?(@group) %>
+            <%= link_to "New Post",new_club_group_post_path(@group) , :class => "btn btn-mini btn-danger"  %>
+         <% end %>
          <% if @group.editable_by?(current_user) %>
                <%= link_to "Edit" , edit_club_group_path(@group) , :class => "btn btn-mini btn-primary pull-right" %>
          <% end %>

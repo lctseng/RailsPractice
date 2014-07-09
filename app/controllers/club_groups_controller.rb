@@ -2,6 +2,7 @@ class ClubGroupsController < ApplicationController
    before_filter :find_group , :only => [:edit,:update,:destroy]
    before_action :login_required, :only => [:new , :create , :edit , :update , :destroy]
 
+
    # Index
    def index
       @groups = ClubGroup.all
@@ -45,6 +46,29 @@ class ClubGroupsController < ApplicationController
    end
 
 
+   def join
+      @group = ClubGroup.find(params[:id])
+      if !current_user.is_member_of?(@group)
+         current_user.join!(@group)
+      else
+         flash[:alert] = "You already joined this group."
+      end
+      redirect_to club_group_path(@group)
+
+   end
+
+   def quit
+      @group = ClubGroup.find(params[:id])
+      if current_user.is_member_of?(@group)
+         current_user.quit!(@group)
+      else
+         flash[:alert] = "You are not member of this group"
+      end
+      redirect_to club_group_path(@group)
+
+   end
+
+
    protected
    # before_filter：找到group
    def find_group
@@ -54,7 +78,6 @@ class ClubGroupsController < ApplicationController
    def group_params(extra_allow = [])
      params.require(:club_group).permit([:title , :description] + extra_allow)
    end
-
 
 
 end
