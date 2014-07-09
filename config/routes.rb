@@ -1,6 +1,7 @@
 #encoding:utf-8
 Rails.application.routes.draw do
 
+  devise_for :users
   # 連結到社團群組網頁
   resources :club_groups do
      resources :posts

@@ -1,8 +1,12 @@
 <div class="span12">
    <div class="group">
-      <%= link_to "Edit" , edit_club_group_path(@group) , :class => "btn btn-mini btn-primary pull-right" %>
       <%= link_to "New Post",new_club_group_post_path(@group) , :class => "btn btn-mini btn-danger"  %>
-      <%= link_to "Back to Index" , club_groups_path , :class => "btn btn-mini btn-warning pull-right" %>
+      <% if current_user %>
+         <% if @group.editable_by?(current_user) %>
+               <%= link_to "Edit" , edit_club_group_path(@group) , :class => "btn btn-mini btn-primary pull-right" %>
+         <% end %>
+         <%= link_to "Back to Index" , club_groups_path , :class => "btn btn-mini btn-warning pull-right" %>
+      <% end %>
    </div>
 
    <h2> <%= @group.title %> </h2>
@@ -13,10 +17,20 @@
       <tbody>
       <% @posts.each do |post| %>
          <tr>
-         <td><%= post.content %></td>
-         <td><%= link_to "Edit", edit_club_group_post_path(post.club_group,post) , :class => "btn btn-mini" %></td>
-         <td><%= link_to "Delete", club_group_post_path(post.club_group,post) , :class => "btn btn-mini" , :method => :delete , :confirm => "Are you sure?" %></td>
-      </tr>
+            <td>
+               <span class="author">
+                  <strong>Author: <%= post.author.name %></strong>
+               </span>
+               <p>
+                  <%= simple_format(post.content) %>
+               </p>
+            </td>
+            <% if current_user && post.editable_by?(current_user) %>
+               <td><%= link_to "Edit", edit_club_group_post_path(post.club_group,post) , :class => "btn btn-mini" %></td>
+               <td><%= link_to "Delete", club_group_post_path(post.club_group,post) , :class => "btn btn-mini" , :method => :delete , :confirm => "Are you sure?" %></td>
+            <% end %>
+
+         </tr>
       <% end %>
       </tbody>
    </table>

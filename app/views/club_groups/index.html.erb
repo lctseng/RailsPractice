@@ -1,3 +1,10 @@
+<div class="account" >
+   <%= link_to "Sign up" , new_user_registration_path , :class => "btn btn-primary" %>
+   <%= link_to "Login" , new_user_session_path , :class => "btn btn-warning"   %>
+   <%==link_to "Logout" , destroy_user_session_path , :method => :delete ,  :class => "btn btn-danger"  %>
+
+</div>
+
 <div class="span12">
    <div class="group">
       <%= link_to "New Group", new_club_group_path , :class => "btn btn-mini btn-primary pull-right" %>
@@ -8,6 +15,7 @@
             <td> # </td>
             <td> Title </td>
             <td> Description </td>
+            <td> Owner </td>
          </tr>
       </thead>
       <tbody>
@@ -15,8 +23,14 @@
          <tr>
             <td> # </td>
             <td> <%= link_to(group.title,club_group_path(group)) %> </td>
-            <td> <%= link_to("Edit",edit_club_group_path(group) , :class => "btn btn-mini")  %>
-            <td> <%= link_to "Delete", club_group_path(group) , :class => "btn btn-mini" , :method => "delete" , :confirm => "Are you sure?" %> </td>
+            <td><%= group.description %></td>
+            <td><%= group.owner.name %></td>
+
+            <% if current_user && group.editable_by?(current_user) %>
+               <td> <%= link_to("Edit",edit_club_group_path(group) , :class => "btn btn-mini")  %>
+               <td> <%= link_to "Delete", club_group_path(group) , :class => "btn btn-mini" , :method => "delete" , :confirm => "Are you sure?" %> </td>
+            <% end %>
+
          </tr>
          <% end %>
       </tbody>

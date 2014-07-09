@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
    before_filter :find_group 
    before_filter :find_post , :only => [:edit,:update,:destroy]
+   before_action :login_required , :only => [:new , :create , :edit , :update , :destroy]
 
    def edit
       @page_title = "Edit Post"
@@ -27,6 +28,7 @@ class PostsController < ApplicationController
 
    def create
       @post = @group.posts.new(post_params)
+      @post.author = current_user
       if @post.save
          redirect_to club_group_path(@group)
       else
@@ -40,7 +42,7 @@ class PostsController < ApplicationController
    end
 
    def find_post
-      @post = @group.posts.find(params[:id])
+      @post = current_user.posts.find(params[:id])
    end
 
    def post_params(extra_allow=[])

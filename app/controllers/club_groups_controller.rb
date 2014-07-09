@@ -1,5 +1,6 @@
 class ClubGroupsController < ApplicationController
-   before_filter :find_group , :only => [:show,:edit,:update,:destroy]
+   before_filter :find_group , :only => [:edit,:update,:destroy]
+   before_action :login_required, :only => [:new , :create , :edit , :update , :destroy]
 
    # Index
    def index
@@ -8,6 +9,7 @@ class ClubGroupsController < ApplicationController
 
    # Show
    def show
+      @group = ClubGroup.find(params[:id])
       @posts = @group.posts
    end
 
@@ -18,7 +20,7 @@ class ClubGroupsController < ApplicationController
    
    # Create
    def create
-      @group = ClubGroup.new(group_params)
+      @group = current_user.club_groups.build(group_params)
       if @group.save
          redirect_to club_groups_path
       else
@@ -46,7 +48,7 @@ class ClubGroupsController < ApplicationController
    protected
    # before_filter：找到group
    def find_group
-      @group = ClubGroup.find(params[:id])
+      @group = current_user.club_groups.find(params[:id])
    end
    # 經過permit的mass參數 
    def group_params(extra_allow = [])

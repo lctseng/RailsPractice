@@ -8,6 +8,8 @@ gem 'sqlite3'
 gem 'mysql2'
 # 分頁外掛
 gem "kaminari"
+# 認證功能 
+gem "devise"
 # WebServer
 gem 'thin'
 # Use SCSS for stylesheets
