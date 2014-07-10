@@ -11,6 +11,16 @@ Rails.application.routes.draw do
      end
   end
 
+  # 社團管理 
+
+  namespace :account do
+     resources :club_groups
+     resources :posts
+  end
+
+
+
+
   #resources :persions
 
   namespace :admin do 

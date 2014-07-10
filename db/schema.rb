@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140709145938) do
+ActiveRecord::Schema.define(version: 20140710061334) do
 
   create_table "answers", force: true do |t|
     t.integer  "question_id"
@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(version: 20140709145938) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
+    t.integer  "posts_count", default: 0
   end
 
   create_table "event_groupships", force: true do |t|
@@ -63,7 +64,7 @@ ActiveRecord::Schema.define(version: 20140709145938) do
   add_index "events", ["category_id"], name: "index_events_on_category_id", using: :btree
 
   create_table "group_userships", force: true do |t|
-    t.integer  "group_id"
+    t.integer  "club_group_id"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"

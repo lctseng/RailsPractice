@@ -11,7 +11,7 @@ class ClubGroupsController < ApplicationController
    # Show
    def show
       @group = ClubGroup.find(params[:id])
-      @posts = @group.posts
+      @posts = @group.posts.order("updated_at DESC")
    end
 
    # New
