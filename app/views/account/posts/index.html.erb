@@ -1,4 +1,6 @@
 <div class="span12">
+   <h2> My Posts </h2>
+   
    <table class="table">
 
       <thead>
@@ -14,7 +16,7 @@
          <tr>
             <td><p><%= post.content %></p></td>
             <td> <%= post.club_group.title %> </td>
-            <td><%= post.updated_at %></td>
+            <td><%= post.updated_at.to_s(:long) %></td>
             <td><%= link_to "Edit",edit_club_group_post_path(post.club_group,post),:class => "btn btn-mini" %></td>
             <td><%= link_to "Delete",club_group_post_path(post.club_group,post),:class => "btn btn-mini" ,:method => :delete , :confirm => "Are you sure?" %></td>
          </tr>
